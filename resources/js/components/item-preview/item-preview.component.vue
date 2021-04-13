@@ -35,10 +35,12 @@ export default {
             }
 
             const {unit, stok, harga_grosir, ...rest} = this.data;
-            this.data.stok -= 1;
+            
             if (this.data.stok  == 0) {
                 return;
             }
+
+            this.data.stok -= 1;
             rest.qty = 1;
             this.$store.dispatch('addToCart', rest);
         }
