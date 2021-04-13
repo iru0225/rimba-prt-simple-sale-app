@@ -2,12 +2,14 @@
     <div>
         <div class="mini-cart" :class="{'open' : this.open}">
             <div>
-                <div v-for="(item, index) in cart" :key="index">
-                    <span>{{item.name}} - {{item.qty}} x {{item.harga_satuan}}</span>
+                <div class="cart-wrapper" v-for="(item, index) in cart" :key="index">
+                    <div class="cart-detail">
+                        <span>{{item.name}} - {{item.qty}} x {{item.harga_satuan}}</span>
+                        <span @click="removeItem(item.id)"><i class="far fa-trash-alt"></i></span>
+                    </div>
                     <span>{{item.qty * item.harga_satuan}}</span>
-                    <hr>
                 </div>
-                TOTAL: {{total}}
+                <span>TOTAL: {{total}}</span>
             </div>
         </div>
     </div>
@@ -18,6 +20,18 @@ export default {
     props: [
         'open'
     ],
+
+    data() {
+        return {
+            data: null
+        }
+    },
+
+    methods:{
+        removeItem(val){
+            this.$store.dispatch('removeItem', val);
+        }
+    },
 
     computed:{
         cart(){
@@ -33,7 +47,7 @@ export default {
 
 <style lang="scss" scoped>
     .mini-cart{
-        width: 200px;
+        width: 220px;
         height: 300px;
         overflow-y: auto;
         border: 1px solid;
@@ -47,9 +61,22 @@ export default {
             background: #F6F1EC;
         }
         
-        div{
+        .cart-wrapper{
+            padding: .2rem .3rem;
             display: flex;
             flex-direction: column;
+
+            .cart-detail{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                span{
+                    i{
+                        color: red;
+                    }
+                }
+            }
             span{
                 font-size: 12px;
             }

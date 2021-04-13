@@ -1922,7 +1922,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     openCart: function openCart() {
-      console.log(this.open);
       this.open = !this.open;
     }
   },
@@ -1932,7 +1931,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     qty: function qty() {
       var data = this.$store.getters.TotalItem;
-      console.log(data);
       return data;
     }
   }
@@ -2041,8 +2039,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['open'],
+  data: function data() {
+    return {
+      data: null
+    };
+  },
+  methods: {
+    removeItem: function removeItem(val) {
+      this.$store.dispatch('removeItem', val);
+    }
+  },
   computed: {
     cart: function cart() {
       return this.$store.state.cart;
@@ -2269,12 +2279,22 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
       }
 
       state.cart.push(data);
+    },
+    REMOVE_ITEM_FROM_CART: function REMOVE_ITEM_FROM_CART(state, data) {
+      var newData = state.cart.filter(function (e) {
+        return e.id != data;
+      });
+      return state.cart = newData;
     }
   },
   actions: {
     addToCart: function addToCart(_ref, data) {
       var commit = _ref.commit;
       commit('ADD_TO_CART', data);
+    },
+    removeItem: function removeItem(_ref2, data) {
+      var commit = _ref2.commit;
+      commit('REMOVE_ITEM_FROM_CART', data);
     }
   }
 });
@@ -2298,7 +2318,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n#header[data-v-4b2ebaa3] {\n  position: sticky;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 3.4rem;\n  background-color: #F6F1EC;\n}\n#header .nav-menu[data-v-4b2ebaa3] {\n  display: flex;\n  justify-content: space-between;\n}\n#header .nav-menu .nav-logo[data-v-4b2ebaa3] {\n  background: url(/images/basmalah.svg?61a5b7e…) no-repeat;\n  background-position: center;\n  background-size: 125px auto;\n  width: 145px;\n  height: 1.8rem;\n  text-indent: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n}\n#header .nav-menu .nav-logo a[data-v-4b2ebaa3] {\n  height: 100%;\n  display: block;\n}\n#header .nav-menu .nav-menu-list[data-v-4b2ebaa3] {\n  height: 3.4rem;\n}\n#header .nav-menu .nav-menu-list .menu-list[data-v-4b2ebaa3] {\n  display: flex;\n  justify-content: space-around;\n  flex-direction: row;\n}\n#header .nav-menu .nav-menu-list .menu-list .menu-item[data-v-4b2ebaa3] {\n  font-size: 1.3rem;\n  padding: 1rem 2rem;\n}\n#header .nav-menu .nav-menu-list .menu-list .menu-item a[data-v-4b2ebaa3] {\n  text-decoration: none;\n  color: dimgray;\n}\n#header .nav-menu .nav-user-cart[data-v-4b2ebaa3] {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 1rem 1.3rem;\n  font-size: 1.3rem;\n}\n#header .nav-menu .nav-user-cart i[data-v-4b2ebaa3] {\n  margin: 0 5px 0 5px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n#header[data-v-4b2ebaa3] {\n  position: sticky;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 3.4rem;\n  background-color: #F6F1EC;\n}\n#header .nav-menu[data-v-4b2ebaa3] {\n  display: flex;\n  justify-content: space-between;\n}\n#header .nav-menu .nav-logo[data-v-4b2ebaa3] {\n  background: url(/images/basmalah.svg?61a5b7e…) no-repeat;\n  background-position: center;\n  background-size: 125px auto;\n  width: 145px;\n  height: 1.8rem;\n  text-indent: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n}\n#header .nav-menu .nav-logo a[data-v-4b2ebaa3] {\n  height: 100%;\n  display: block;\n}\n#header .nav-menu .nav-menu-list[data-v-4b2ebaa3] {\n  height: 3.4rem;\n}\n#header .nav-menu .nav-menu-list .menu-list[data-v-4b2ebaa3] {\n  display: flex;\n  justify-content: space-around;\n  flex-direction: row;\n}\n#header .nav-menu .nav-menu-list .menu-list .menu-item[data-v-4b2ebaa3] {\n  font-size: 1.3rem;\n  padding: 1rem 2rem;\n}\n#header .nav-menu .nav-menu-list .menu-list .menu-item a[data-v-4b2ebaa3] {\n  text-decoration: none;\n  color: dimgray;\n}\n#header .nav-menu .nav-user-cart[data-v-4b2ebaa3] {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 1rem 1.3rem;\n  font-size: 1.3rem;\n}\n#header .nav-menu .nav-user-cart .nav-cart[data-v-4b2ebaa3] {\n  cursor: pointer;\n}\n#header .nav-menu .nav-user-cart .nav-cart i[data-v-4b2ebaa3] {\n  margin: 0 5px 0 5px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2322,7 +2342,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".item-preview[data-v-85af717a] {\n  width: 16rem;\n  border: 1px solid black;\n  padding: 0.3rem 0.5rem;\n}\n.item-preview .item-image[data-v-85af717a] {\n  width: 100%;\n  border: 1px solid;\n  height: 20rem;\n  margin-bottom: 1.3rem;\n}\n.item-preview .item-image img[data-v-85af717a] {\n  width: 100%;\n}\n.item-preview .item-detail[data-v-85af717a] {\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 0.8rem;\n}\n.item-preview .buy-button[data-v-85af717a] {\n  background: lightgreen;\n  cursor: pointer;\n  border-radius: 3px;\n  margin-bottom: 5px;\n}\n.item-preview .add-cart[data-v-85af717a] {\n  background: lightseagreen;\n  cursor: pointer;\n  border-radius: 3px;\n  margin-bottom: 5px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".item-preview[data-v-85af717a] {\n  background-color: #F6F1EC;\n  width: 16rem;\n  padding: 0.3rem 0.5rem;\n}\n.item-preview .item-image[data-v-85af717a] {\n  width: 100%;\n  height: 20rem;\n  margin-bottom: 1.3rem;\n}\n.item-preview .item-image img[data-v-85af717a] {\n  width: 100%;\n}\n.item-preview .item-detail[data-v-85af717a] {\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 0.8rem;\n}\n.item-preview .buy-button[data-v-85af717a] {\n  background: lightgreen;\n  cursor: pointer;\n  border-radius: 3px;\n  margin-bottom: 5px;\n}\n.item-preview .add-cart[data-v-85af717a] {\n  background: lightseagreen;\n  cursor: pointer;\n  border-radius: 3px;\n  margin-bottom: 5px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2346,7 +2366,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".mini-cart[data-v-77178af1] {\n  width: 200px;\n  height: 300px;\n  overflow-y: auto;\n  border: 1px solid;\n  position: absolute;\n  top: -100vh;\n  right: 5px;\n  transition: 0.3s ease-in-out;\n}\n.mini-cart.open[data-v-77178af1] {\n  top: 3.4rem;\n  background: #F6F1EC;\n}\n.mini-cart div[data-v-77178af1] {\n  display: flex;\n  flex-direction: column;\n}\n.mini-cart div span[data-v-77178af1] {\n  font-size: 12px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".mini-cart[data-v-77178af1] {\n  width: 220px;\n  height: 300px;\n  overflow-y: auto;\n  border: 1px solid;\n  position: absolute;\n  top: -100vh;\n  right: 5px;\n  transition: 0.3s ease-in-out;\n}\n.mini-cart.open[data-v-77178af1] {\n  top: 3.4rem;\n  background: #F6F1EC;\n}\n.mini-cart .cart-wrapper[data-v-77178af1] {\n  padding: 0.2rem 0.3rem;\n  display: flex;\n  flex-direction: column;\n}\n.mini-cart .cart-wrapper .cart-detail[data-v-77178af1] {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n.mini-cart .cart-wrapper .cart-detail span i[data-v-77178af1] {\n  color: red;\n}\n.mini-cart .cart-wrapper span[data-v-77178af1] {\n  font-size: 12px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3383,23 +3403,36 @@ var render = function() {
         "div",
         [
           _vm._l(_vm.cart, function(item, index) {
-            return _c("div", { key: index }, [
-              _c("span", [
-                _vm._v(
-                  _vm._s(item.name) +
-                    " - " +
-                    _vm._s(item.qty) +
-                    " x " +
-                    _vm._s(item.harga_satuan)
+            return _c("div", { key: index, staticClass: "cart-wrapper" }, [
+              _c("div", { staticClass: "cart-detail" }, [
+                _c("span", [
+                  _vm._v(
+                    _vm._s(item.name) +
+                      " - " +
+                      _vm._s(item.qty) +
+                      " x " +
+                      _vm._s(item.harga_satuan)
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.removeItem(item.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "far fa-trash-alt" })]
                 )
               ]),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(item.qty * item.harga_satuan))]),
-              _vm._v(" "),
-              _c("hr")
+              _c("span", [_vm._v(_vm._s(item.qty * item.harga_satuan))])
             ])
           }),
-          _vm._v("\n            TOTAL: " + _vm._s(_vm.total) + "\n        ")
+          _vm._v(" "),
+          _c("span", [_vm._v("TOTAL: " + _vm._s(_vm.total))])
         ],
         2
       )

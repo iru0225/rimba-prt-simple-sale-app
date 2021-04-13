@@ -41,7 +41,6 @@ export default {
     },
     methods:{
         openCart(){
-            console.log(this.open);
             this.open = !this.open;
         }
     },
@@ -52,7 +51,6 @@ export default {
 
         qty(){
             let data = this.$store.getters.TotalItem
-            console.log(data);
             return data;
         }
     }
@@ -115,8 +113,11 @@ export default {
                 padding: 1rem 1.3rem;
                 font-size: 1.3rem;
 
-                i{
-                    margin: 0 5px 0 5px;
+                .nav-cart{
+                    cursor: pointer;
+                    i{
+                        margin: 0 5px 0 5px;
+                    }
                 }
             }
         }

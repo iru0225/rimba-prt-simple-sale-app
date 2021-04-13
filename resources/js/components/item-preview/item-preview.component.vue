@@ -59,13 +59,12 @@ export default {
 
 <style lang="scss" scoped>
     .item-preview{
+        background-color: #F6F1EC;
         width: 16rem;
-        border: 1px solid black;
         padding: .3rem .5rem;
 
         .item-image{
             width: 100%;
-            border: 1px solid;
             height: 20rem;
             margin-bottom: 1.3rem;
 

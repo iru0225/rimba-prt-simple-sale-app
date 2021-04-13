@@ -62,12 +62,21 @@ export const store = new Vuex.Store({
             }
 
             state.cart.push(data);
+        },
+
+        REMOVE_ITEM_FROM_CART(state, data){
+            let newData = state.cart.filter(e => e.id != data);
+            return state.cart  = newData;
         }
     },
 
     actions:{
         addToCart({commit}, data)  {
             commit('ADD_TO_CART', data)
+        },
+
+        removeItem({commit}, data){
+            commit('REMOVE_ITEM_FROM_CART', data);
         }
     }
 })
