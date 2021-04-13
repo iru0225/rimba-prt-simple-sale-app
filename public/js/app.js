@@ -1994,6 +1994,11 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
           rest = _objectWithoutProperties(_this$data, ["unit", "stok", "harga_grosir"]);
 
       this.data.stok -= 1;
+
+      if (this.data.stok == 0) {
+        return;
+      }
+
       rest.qty = 1;
       this.$store.dispatch('addToCart', rest);
     }
